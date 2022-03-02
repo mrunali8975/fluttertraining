@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:myflutterapp/thirdayflutter.dart';
+import 'day3_homework.dart';
 main() {
   runApp(MaterialApp(
-    home: FirstPage(),
+    home: Day3(),
     //debugShowCheckedModeBanner: false,
     //theme: ThemeData(brightness: Brightness.dark,
     // primaryColor: Colors.green,
@@ -18,6 +19,10 @@ class FirstPage extends StatelessWidget {
     // TODO: implement build
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: Container(
+          height: 40,
+          color: Colors.amber,
+        ),
         appBar: AppBar(
           leading: Icon(Icons.menu),
           title: Text("TITLE"),
