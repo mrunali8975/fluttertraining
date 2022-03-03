@@ -202,7 +202,7 @@ class Day3 extends StatelessWidget {
                             Text(
                               "Shell Darwen",
                               style:
-                              TextStyle(fontSize: 20, color: Colors.white,fontWeight: FontWeight.bold),
+                              TextStyle(fontSize: 25, color: Colors.white,fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 5.0,
