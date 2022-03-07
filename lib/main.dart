@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:myflutterapp/thirdayflutter.dart';
 import 'day3_homework.dart';
 import 'day4.dart';
+import 'day5.dart';
+import 'restaurant.dart';
 main() {
   runApp(MaterialApp(
-    home: workDay4(),
+    home:RestaurantMenu(),
     //debugShowCheckedModeBanner: false,
     //theme: ThemeData(brightness: Brightness.dark,
     // primaryColor: Colors.green,
