@@ -29,6 +29,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  circle_bottom_navigation_bar: ^1.0.0
+  flutter_rating_stars: ^1.0.3+4
+
 
 
   # The following adds the Cupertino Icons font to your application.
