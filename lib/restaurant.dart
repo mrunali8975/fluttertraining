@@ -1,11 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circle_bottom_navigation_bar/circle_bottom_navigation_bar.dart';
 import "package:circle_bottom_navigation_bar/widgets/tab_data.dart";
 import 'package:circle_bottom_navigation_bar/circle_bottom_navigation_bar.dart';
+import 'package:myflutterapp/day5.dart';
 import 'addcart.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
-
 
 Widget size(double mywidth) => SizedBox(width: mywidth);
 
@@ -15,57 +17,7 @@ class RestaurantMenu extends StatefulWidget {
   @override
   State<RestaurantMenu> createState() => _RestaurantMenuState();
 }
-class _MyAppState extends State<MyApp> {
-  double value = 3.5;
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Example',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Example'),
-        ),
-        body: Center(
-          child: RatingStars(
-            value: value,
-            onValueChanged: (v) {
-              //
-              setState(() {
-                value = v;
-              });
-            },
-            starBuilder: (index, color) => Icon(
-              Icons.ac_unit_outlined,
-              color: color,
-            ),
-            starCount: 5,
-            starSize: 20,
-            valueLabelColor: const Color(0xff9b9b9b),
-            valueLabelTextStyle: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
-                fontStyle: FontStyle.normal,
-                fontSize: 12.0),
-            valueLabelRadius: 10,
-            maxValue: 5,
-            starSpacing: 2,
-            maxValueVisibility: true,
-            valueLabelVisibility: true,
-            animationDuration: Duration(milliseconds: 1000),
-            valueLabelPadding:
-            const EdgeInsets.symmetric(vertical: 1, horizontal: 8),
-            valueLabelMargin: const EdgeInsets.only(right: 8),
-            starOffColor: const Color(0xffe7e8ea),
-            starColor: Colors.yellow,
-          ),
-        ),
-      ),
-    );
-  }
-}
+
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -141,8 +93,11 @@ class Alarm extends StatelessWidget {
     );
   }
 }
+
 class _RestaurantMenuState extends State<RestaurantMenu>
     with TickerProviderStateMixin {
+  bool _hasMore=true;
+
   int currentPage = 0;
   final List<Widget> _pages = [
     Home(),
@@ -156,39 +111,82 @@ class _RestaurantMenuState extends State<RestaurantMenu>
       'price': '\$139',
       'desc': 'Chees,olives,jalapenos,tomatoes & onions',
       'image':
-          'https://images.all-free-download.com/images/graphiclarge/homemade_burger_560254.jpg',
-    },
+          'https://media-cdn.tripadvisor.com/media/photo-s/19/1e/1a/3a/pizza-hut.jpg'
+  ,'favorite': false,
+
+},
     {
       'name': 'Chilli Cheese Chicken',
       'price': '\$159',
       'desc': 'Chicken pepperoni on top of foey chilli cheese',
       'image':
-          'https://images.all-free-download.com/images/graphiclarge/homemade_burger_560254.jpg',
+          'https://media-cdn.tripadvisor.com/media/photo-s/14/9f/76/9b/pizza-hut.jpg'
+
+    ,'favorite': false,
     },
     {
       'name': 'Potato Wedged',
       'price': '\$165',
       'desc': ' Served with cheese  & jalapeno dip',
       'image':
-          'https://images.all-free-download.com/images/graphiclarge/homemade_burger_560254.jpg',
+          'https://images.jdmagicbox.com/comp/delhi/55/011p86055/catalogue/pizza-hut-karol-bagh-delhi-pizza-outlets-2asfr2c.jpg?clr=#3e3328'
+    ,      'favorite': false,
+    },
+    {
+      'name': 'Potato Wedged',
+      'price': '\$165',
+      'desc': ' Served with cheese  & jalapeno dip',
+      'image':
+          'https://images.jdmagicbox.com/comp/delhi/55/011p86055/catalogue/pizza-hut-karol-bagh-delhi-pizza-outlets-2asfr2c.jpg?clr=#3e3328'
+  ,      'favorite': false,
+    },
+    {
+      'name': 'Potato Wedged',
+      'price': '\$165',
+      'desc': ' Served with cheese  & jalapeno dip',
+      'image':
+          'https://images.jdmagicbox.com/comp/delhi/55/011p86055/catalogue/pizza-hut-karol-bagh-delhi-pizza-outlets-2asfr2c.jpg?clr=#3e3328'
+  ,      'favorite': false,
+    },
+    {      'favorite': false,
+
+      'name': 'Potato Wedged',
+      'price': '\$165',
+      'desc': ' Served with cheese  & jalapeno dip',
+      'image':
+          'https://images.jdmagicbox.com/comp/delhi/55/011p86055/catalogue/pizza-hut-karol-bagh-delhi-pizza-outlets-2asfr2c.jpg?clr=#3e3328'
+    },
+    {
+      'favorite': false,
+
+      'name': 'Potato Wedged',
+      'price': '\$165',
+      'desc': ' Served with cheese  & jalapeno dip',
+      'image':
+          'https://images.jdmagicbox.com/comp/delhi/55/011p86055/catalogue/pizza-hut-karol-bagh-delhi-pizza-outlets-2asfr2c.jpg?clr=#3e3328'
     },
   ];
   List burger = [
-    {
+    {      'favorite': false,
+
       'name': 'Cheese Meltdown',
       'price': '\$139',
       'desc':
           'A BK Original Burger With Cheese oozing Spicy Veg Patty. A Must Try!',
-      'image':'https://image.shutterstock.com/image-photo/vegetarian-burger-260nw-664768828.jpg'
+      'image':
+          'https://image.shutterstock.com/image-photo/vegetarian-burger-260nw-664768828.jpg'
     },
     {
+      'favorite': false,
+
       'image':
-         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8JlJ6IK0bKjqvpcQY-LJWpNBmdf3YWl_Tp7I9ZaEOy485DJbgpdWdJ4OhEacuxmOz_Pk&usqp=CAU',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8JlJ6IK0bKjqvpcQY-LJWpNBmdf3YWl_Tp7I9ZaEOy485DJbgpdWdJ4OhEacuxmOz_Pk&usqp=CAU',
       'name': 'Crispy Veg Double Patty + Crispy Veg Double Patty',
       'price': '\$139',
       'desc': 'Crispy Veg Double Patty + Crispy Veg Double Patty'
     },
-    {
+    {      'favorite': false,
+
       'image':
           'https://images.all-free-download.com/images/graphiclarge/homemade_burger_560254.jpg',
       'name': 'Lite Whopper Jr Veg + Lite Whopper Jr Veg',
@@ -206,6 +204,7 @@ class _RestaurantMenuState extends State<RestaurantMenu>
   void initState() {
     tabController = TabController(length: 7, vsync: this);
     super.initState();
+    _hasMore=true;
   }
 
   @override
@@ -219,9 +218,9 @@ class _RestaurantMenuState extends State<RestaurantMenu>
         tabs: [
           TabData(
             icon: Icons.home,
-            iconSize: 25,// Optional
-            title: 'Home',// Optional
-            fontSize: 12,// Optional
+            iconSize: 25, // Optional
+            title: 'Home', // Optional
+            fontSize: 12, // Optional
           ),
           TabData(icon: Icons.history),
           TabData(icon: Icons.search),
@@ -231,7 +230,6 @@ class _RestaurantMenuState extends State<RestaurantMenu>
       ),
       body: Column(
         children: [
-
           Padding(
             padding: EdgeInsets.all(10.0),
             child: Stack(
@@ -256,23 +254,19 @@ class _RestaurantMenuState extends State<RestaurantMenu>
           ),
           Expanded(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  height: 50,
-                  child: TabBar(
-                    isScrollable: true,
-                    controller: tabController,
-                    tabs: [
-                      cardText("PIZZA"),
-                      cardText("BURGER"),
-                      cardText("COFFIE"),
-                      cardText("HOT TEAS"),
-                      cardText("DESSERTS"),
-                      cardText("LEMONADES"),
-                      cardText("LEMONADES")
-                    ],
-                  ),
+                TabBar(
+                  isScrollable: true,
+                  controller: tabController,
+                  tabs: [
+                    cardText("PIZZA"),
+                    cardText("BURGER"),
+                    cardText("COFFIE"),
+                    cardText("HOT TEAS"),
+                    cardText("DESSERTS"),
+                    cardText("LEMONADES"),
+                    cardText("LEMONADES")
+                  ],
                 ),
                 Expanded(
                   child: TabBarView(
@@ -287,15 +281,15 @@ class _RestaurantMenuState extends State<RestaurantMenu>
                           return item(
                             name: pizza[index]['name'],
                             Desc: pizza[index]['desc'],
-                            image: data[index]['image'],
-                            price: data[index]['price'],
-                            fav: data[index]['favorite'] ?? false,
+                            image: pizza[index]['image'],
+                            price: pizza[index]['price'],
+                            fav: pizza[index]['favorite'] ?? false,
                             onTap: () {
                               showModalBottomSheet(
                                   context: context,
                                   builder: (context) {
                                     return BottomSheetData(
-                                      img: data[index]['image'],
+                                      img: pizza[index]['image'],
                                       name: pizza[index]['name'],
                                       desc: pizza[index]['desc'],
                                       price: pizza[index]['price'],
@@ -309,14 +303,14 @@ class _RestaurantMenuState extends State<RestaurantMenu>
                       ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: pizza.length,
+                        itemCount: burger.length+ (_hasMore?1:0),
                         itemBuilder: (context, index) {
                           return item(
                             name: burger[index]['name'],
                             Desc: burger[index]['desc'],
-                            image: data[index]['image'],
+                            image: burger[index]['image'],
                             price: burger[index]['price'],
-                            fav: data[index]['favorite'] ?? false,
+                            fav: burger[index]['favorite'] ?? false,
                             onTap: () {
                               showModalBottomSheet(
                                   context: context,
@@ -385,23 +379,18 @@ class _RestaurantMenuState extends State<RestaurantMenu>
     return ListTile(
       onTap: onTap,
       leading: CircleAvatar(
-        radius: 40,
+        radius: 50,
+        backgroundColor: Colors.red,
         backgroundImage: NetworkImage(image),
       ),
       trailing: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          GestureDetector(
-            child: Icon(
-              fav ? Icons.favorite : Icons.favorite_border,
-              color: fav ? Colors.red : Colors.grey,
-            ),
-            onTap: favorite,
+          Icon(
+            fav ? Icons.favorite : Icons.favorite_border,
+            color: fav ? Colors.red : Colors.grey,
           ),
-          GestureDetector(
-            child: Icon(Icons.add),
-            onTap: moveToNext,
-          ),
+          Icon(Icons.add),
         ],
       ),
       title: Text(
@@ -479,6 +468,8 @@ class _BottomSheetDataState extends State<BottomSheetData> {
         children: [
           ListTile(
             leading: CircleAvatar(
+              radius: 50,
+              backgroundColor: Colors.red,
               backgroundImage: NetworkImage(widget.img),
             ),
             title: Text(
@@ -634,7 +625,18 @@ class _BottomSheetDataState extends State<BottomSheetData> {
               color: Colors.red,
               child: TextButton(
                 onPressed: () {
-
+                  //MaterialPageRoute()
+                  setState(() {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => addCart(
+                            proName: widget.name,
+                            proimage: widget.img,
+                            prDesc: widget.desc,
+                          ),
+                        ));
+                  });
                 },
                 child: Text(
                   "Add Cart",

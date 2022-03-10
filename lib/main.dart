@@ -5,9 +5,16 @@ import 'day3_homework.dart';
 import 'day4.dart';
 import 'day5.dart';
 import 'restaurant.dart';
+import 'newrestroapp.dart';
+import 'addcart.dart';
+import 'database.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(MaterialApp(
-    home:RestaurantMenu(),
+    home:workDay4(),
     //debugShowCheckedModeBanner: false,
     //theme: ThemeData(brightness: Brightness.dark,
     // primaryColor: Colors.green,
