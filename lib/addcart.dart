@@ -8,8 +8,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:image_picker/image_picker.dart';
+
 //import 'package:myflutterapp/database.dart';
-class addCart extends StatelessWidget {
+class addCart extends StatefulWidget {
   addCart({
     Key? key,
     this.proName = '',
@@ -19,29 +20,31 @@ class addCart extends StatelessWidget {
   String proName = '';
   String prDesc = '';
   String proimage = '';
-  String imageUrl='';
-  FirebaseStorage storage =FirebaseStorage.instance;
+
+  @override
+  State<addCart> createState() => _addCartState();
+}
+
+class _addCartState extends State<addCart> {
+  String imageUrl = '';
+
+  FirebaseStorage storage = FirebaseStorage.instance;
 
   // getProfilImage() async {
-  //   final ImagePicker _picker = ImagePicker();
-  //   XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-  // }
-
-  uploadImage() async{
+  uploadImage() async {
     final ImagePicker _picker = ImagePicker();
     XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    Reference reference = storage.ref().child("image/${DateTime.now().toString()}");
+    Reference reference =
+    storage.ref().child("image/${DateTime.now().toString()}");
     UploadTask uploadTask = reference.putFile(File(image!.path));
-    await (await uploadTask).ref.getDownloadURL().then((value)
-    {
+    await (await uploadTask).ref.getDownloadURL().then((value) {
       print(" -==== $value");
-      imageUrl=value;
+      imageUrl = value;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -73,7 +76,7 @@ class addCart extends StatelessWidget {
                 width: 400,
                 color: Colors.blue,
                 child: Image(
-                  image: NetworkImage(proimage),
+                  image: NetworkImage(widget.proimage),
                 ),
               ),
               SizedBox(
@@ -93,10 +96,7 @@ class addCart extends StatelessWidget {
                       ),
                       Text(
                         "by pizza hut",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black87
-                        ),
+                        style: TextStyle(fontSize: 20, color: Colors.black87),
                       ),
                     ],
                   ),
@@ -108,7 +108,32 @@ class addCart extends StatelessWidget {
                     ),
                   )
                 ],
-              )
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              TextButton(
+                  onPressed: () {
+                    showDialog(context: context, builder: (context) =>
+                        AlertDialog(
+                          actions: [
+                            Text("Your Order is Successfully "),
+                            TextButton(onPressed: () =>Navigator.pop(context,'OK')
+                                , child: Text("OK"))
+
+                          ],
+                        ));
+                  },
+                  child: Container(
+                      height: 50,
+                      width: 200,
+                      padding: EdgeInsets.all(10),
+                      color: Colors.yellowAccent,
+                      child: Text(
+                        "PLACE ORDER",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 25),
+                      )))
             ],
           ),
         ),

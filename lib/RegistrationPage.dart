@@ -1,12 +1,13 @@
 import 'dart:io';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:myflutterapp/database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'navigationpush.dart';
+import 'UserDetails.dart';
 
 class workDay4 extends StatefulWidget {
   const workDay4({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _workDay4State extends State<workDay4> {
   String imageUrl = '';
   FirebaseStorage storage = FirebaseStorage.instance;
 
- uploadImage() async {
+  uploadImage() async {
     final ImagePicker _picker = ImagePicker();
     XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     Reference reference =
@@ -71,7 +72,7 @@ class _workDay4State extends State<workDay4> {
                 height: 100,
                 width: 100,
                 child: Image.network(
-                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                    'https://www.nicepng.com/png/full/138-1388174_login-account-icon.png'),
               ),
               SizedBox(
                 height: 10,
@@ -376,23 +377,18 @@ class _workDay4State extends State<workDay4> {
                         phoneNumberText.text,
                         emailText.text,
                         passText.text);
-                  }
-                  // key.currentState!.validate();
-                  // setState(
-                  //       () {
-                  //     Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //           builder: (context) =>
-                  //               SecondPage(
-                  //                 fName: FnameText.text,
-                  //                 lName: lnameText.text,
-                  //                 gender: gender,
-                  //               ),
-                  //         ));
-                  //   },
-                  // );
-                  ),
+                    MyDataBase.selectData();
+                    //key.currentState!.validate();
+                    setState(
+                      () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SecondPage(),
+                            ));
+                      },
+                    );
+                  }),
               SizedBox(
                 height: 10,
               ),

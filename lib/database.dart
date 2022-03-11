@@ -1,20 +1,22 @@
 import 'package:firebase_database/firebase_database.dart';
 
 class MyDataBase {
-  static List<Map> data = [];
+  static Map data = {};
+  static String dataKey = '';
   static DatabaseReference db = FirebaseDatabase.instance.ref('students');
 
-  static Future insertData(String image,String fname,String key, String lname,String contact,String email,String pass) async {
-    String key = db.push().key!;
+  static Future insertData(String image, String fname, dataKey, String lname,
+      String contact, String email, String pass) async {
+    dataKey = db.push().key!;
 
-    db.child(key).set({
+    db.child(dataKey).set({
       'email': email,
       'pass': pass,
       'fname': fname,
       'lname': lname,
       'contact': contact,
-      'image':image,
-      'key': key,
+      'image': image,
+      'key': dataKey,
     });
   }
 
@@ -33,14 +35,16 @@ class MyDataBase {
   }
 
   static Future selectData() async {
-
     Map temp = {};
-    db.once().then((value) {
+    db.child(dataKey).once().then((value) {
       temp = value.snapshot.value as Map;
       data.clear();
-      temp.forEach((key, value) {
-        data.add(value);
-      });
+       print('//====$temp');
+
+      data = temp;
+      // temp.forEach((key, value) {
+      //   data.add(value);
+      // });
     });
   }
 }
